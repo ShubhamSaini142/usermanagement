@@ -22,6 +22,7 @@ function UserList() {
       alert("Failed to delete user");
     }
   };
+  //deploying the app
 
   return (
     <div className="user-list-container">
