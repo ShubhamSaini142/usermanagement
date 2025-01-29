@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import './AddUser.css';
 
 const AddUser = () => {
-  const [user, setUser] = useState({ name: "", email: "",company: { name: "" } });
+  const [user, setUser] = useState({ name: "", email: "", company: { name: "" } });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,7 +16,7 @@ const AddUser = () => {
       ...prevUser,
       company: {
         ...prevUser.company,
-        name: e.target.value, 
+        name: e.target.value,
       },
     }));
   };
@@ -23,32 +24,34 @@ const AddUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user.name || !user.email || !user.company.name) {
-        alert("All fields are required!");
-       return;
-      }
+      alert("All fields are required!");
+      return;
+    }
     try {
       await axios.post("https://jsonplaceholder.typicode.com/users", user);
       alert("User added successfully");
       navigate("/");
-      console.log(user);
     } catch (error) {
       alert("Failed to add user");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <label>Name</label><br></br>
-      <input  type="text"  name="name" placeholder="Name" onChange={handleChange} />
-      <br></br>
-      <label>Email</label><br></br>
-      <input type="text" name="email" placeholder="Email" onChange={handleChange} />
-      <br></br>
-        <label>Company</label><br></br>
-      <input  type="text" name="name" placeholder="Company Name" onChange={handleCompanyChange} />
-      <br></br>
-      <button type="submit">Add User</button>
-    </form>
+    <div className="add-user-container">
+      <h2>Add User</h2>
+      <form onSubmit={handleSubmit} className="add-user-form">
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Name" onChange={handleChange} />
+        
+        <label>Email</label>
+        <input type="text" name="email" placeholder="Email" onChange={handleChange} />
+        
+        <label>Company</label>
+        <input type="text" name="companyName" placeholder="Company Name" onChange={handleCompanyChange} />
+        
+        <button type="submit">Add User</button>
+      </form>
+    </div>
   );
 };
 

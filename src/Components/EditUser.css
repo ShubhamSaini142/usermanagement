@@ -1,0 +1,49 @@
+.edit-user-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.edit-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-user-form label {
+  text-align: left;
+}
+
+.edit-user-form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.edit-user-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-user-form button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+  .edit-user-container {
+    padding: 10px;
+  }
+
+  .edit-user-form {
+    gap: 10px;
+  }
+}

@@ -1,6 +1,7 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import './UserList.css';
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -23,19 +24,20 @@ function UserList() {
   };
 
   return (
-    <div>
-      <h2>User List</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <Link to="/add">Add User</Link>
-      <ul>
+    <div className="user-list-container">
+      <h1>User List</h1>
+      {error && <p className="error">{error}</p>}
+      <Link to="/add" className="add-user-button">Add User</Link>
+      <ul className="user-list">
         {users.map((user) => (
-          <li key={user.id}>
-           <label>NAME : {user.name} </label>  <br></br>
-           <label>EMAIL : {user.email}</label>   <br></br>
-           <label>COMPANY : {user.company.name}</label> <br></br>    
-            <Link to={`/edit/${user.id}`}>Edit</Link> <br></br> 
-            <button onClick={() => deleteUser(user.id)}>Delete</button>
-            <br></br> <br></br>
+          <li key={user.id} className="user-item">
+            <p><strong>Name:</strong> {user.name}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>Company:</strong> {user.company.name}</p>
+            <div className="actions">
+              <Link to={`/edit/${user.id}`} className="edit-link">Edit</Link>
+              <button onClick={() => deleteUser(user.id)} className="delete-button">Delete</button>
+            </div>
           </li>
         ))}
       </ul>
