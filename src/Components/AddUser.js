@@ -8,7 +8,6 @@ const AddUser = () => {
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
-    console.log(user);
   };
 
   const handleCompanyChange = (e) => {
@@ -23,6 +22,10 @@ const AddUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user.name || !user.email || !user.company.name) {
+        alert("All fields are required!");
+       return;
+      }
     try {
       await axios.post("https://jsonplaceholder.typicode.com/users", user);
       alert("User added successfully");
@@ -35,9 +38,15 @@ const AddUser = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+        <label>Name</label><br></br>
       <input  type="text"  name="name" placeholder="Name" onChange={handleChange} />
+      <br></br>
+      <label>Email</label><br></br>
       <input type="text" name="email" placeholder="Email" onChange={handleChange} />
-      <input   type="text" name="name" placeholder="Company Name" onChange={handleCompanyChange} />
+      <br></br>
+        <label>Company</label><br></br>
+      <input  type="text" name="name" placeholder="Company Name" onChange={handleCompanyChange} />
+      <br></br>
       <button type="submit">Add User</button>
     </form>
   );

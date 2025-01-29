@@ -22,16 +22,19 @@ const EditUser = () => {
         [name]: value, 
       },
     }));
-  
-    console.log(user.company.name);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user.name || !user.email || !user.company.name) {
+        alert("All fields are required!");
+       return;
+      }
     try {
       await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, user);
       alert("User updated successfully");
       navigate("/");
+      console.log(user);
     } catch (error) {
       alert("Failed to update user");
     }
@@ -39,16 +42,21 @@ const EditUser = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-        <label>Name</label>
-      <input name="name" value={user.name} onChange={(e) => setUser({ ...user, name: e.target.value }) } />
-      {console.log(user.name)}
+        <label>Name</label><br></br>
+      <input name="name" type="text" value={user.name} onChange={(e) => setUser({ ...user, name: e.target.value }) } />
+      {/* {console.log(user.name)} */}
+      <br></br>
 
       <label>Email</label>
-      <input name="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
-      {console.log(user.email)}
+      <br></br>
+      <input name="email" type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
+      {/* {console.log(user.email)} */}
+      <br></br>
 
-      <label>Department</label>
+      <label>Company</label>
+      <br></br>
       <input name="name" value={user.company.name} onChange={handleChange} />
+      <br></br>
       <button type="submit">Update User</button>
     </form>
   );
