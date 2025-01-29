@@ -3,12 +3,22 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
-  const [user, setUser] = useState({ name: "", email: "", department: "" });
+  const [user, setUser] = useState({ name: "", email: "",company: { name: "" } });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
     console.log(user);
+  };
+
+  const handleCompanyChange = (e) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      company: {
+        ...prevUser.company,
+        name: e.target.value, 
+      },
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -17,6 +27,7 @@ const AddUser = () => {
       await axios.post("https://jsonplaceholder.typicode.com/users", user);
       alert("User added successfully");
       navigate("/");
+      console.log(user);
     } catch (error) {
       alert("Failed to add user");
     }
@@ -24,9 +35,9 @@ const AddUser = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input name="name" placeholder="Name" onChange={handleChange} />
-      <input name="email" placeholder="Email" onChange={handleChange} />
-      <input name="department" placeholder="Department" onChange={handleChange} />
+      <input  type="text"  name="name" placeholder="Name" onChange={handleChange} />
+      <input type="text" name="email" placeholder="Email" onChange={handleChange} />
+      <input   type="text" name="name" placeholder="Company Name" onChange={handleCompanyChange} />
       <button type="submit">Add User</button>
     </form>
   );

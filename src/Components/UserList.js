@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -30,9 +30,12 @@ function UserList() {
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            {user.firstName} {user.lastName} - {user.email}
-            <Link to={`/edit/${user.id}`}>Edit</Link>
+           <label>NAME : {user.name} </label>  <br></br>
+           <label>EMAIL : {user.email}</label>   <br></br>
+           <label>COMPANY : {user.company.name}</label> <br></br>    
+            <Link to={`/edit/${user.id}`}>Edit</Link> <br></br> 
             <button onClick={() => deleteUser(user.id)}>Delete</button>
+            <br></br> <br></br>
           </li>
         ))}
       </ul>
